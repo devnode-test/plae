@@ -77,7 +77,7 @@ export function Sidebar({ className, onNavigate, userRole = null }: SidebarProps
     },
     {
       href: '/admin/responsables',
-      label: 'Gestión Responsables',
+      label: 'Gestión Líderes',
       icon: User,
       active: pathname.startsWith('/admin/responsables'),
     },
