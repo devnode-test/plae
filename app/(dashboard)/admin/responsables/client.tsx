@@ -188,7 +188,7 @@ export function ResponsablesClient({ initialUsuarios }: ResponsablesClientProps)
       <div className="flex justify-end mb-6">
         <Button onClick={handleCreate} className="w-full sm:w-auto">
           <Plus className="mr-2 h-4 w-4" />
-          Nuevo Responsable
+          Nuevo Líder
         </Button>
       </div>
 
