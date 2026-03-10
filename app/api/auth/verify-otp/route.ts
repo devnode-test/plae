@@ -54,9 +54,18 @@ export async function POST(request: Request) {
         .update({ used: true })
         .eq('email', normalizedEmail);
 
+    const getOrigin = () => {
+      if (process.env.NEXT_PUBLIC_SITE_URL) return process.env.NEXT_PUBLIC_SITE_URL;
+      if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
+      return new URL(request.url).origin;
+    };
+
     const { data: linkData, error: linkError } = await supabaseAdmin.auth.admin.generateLink({
         type: 'magiclink',
-        email: normalizedEmail
+        email: normalizedEmail,
+        options: {
+            redirectTo: `${getOrigin()}/auth/callback`
+        }
     });
 
     if (linkError) {
@@ -64,18 +73,8 @@ export async function POST(request: Request) {
         return NextResponse.json({ error: 'Error al generar sesión' }, { status: 500 });
     }
 
-    const getOrigin = () => {
-      if (process.env.NEXT_PUBLIC_SITE_URL) return process.env.NEXT_PUBLIC_SITE_URL;
-      if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
-      return new URL(request.url).origin;
-    };
-
-    const origin = getOrigin();
     const actionLink = new URL(linkData.properties.action_link);
     
-    // Force redirect to current origin's callback
-    actionLink.searchParams.set('redirect_to', `${origin}/auth/callback`);
-
     return NextResponse.json({ 
         success: true, 
         redirectUrl: actionLink.toString() 
