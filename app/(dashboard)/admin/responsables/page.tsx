@@ -14,7 +14,7 @@ export default async function ResponsablesPage() {
       <div>
         <h1 className="text-2xl font-bold tracking-tight md:text-3xl">Gestión de Líderes</h1>
         <p className="text-sm text-muted-foreground md:text-base">
-          Administra los usuarios y responsables del sistema.
+          Administra los usuarios y líderes del sistema.
         </p>
       </div>
       <ResponsablesClient initialUsuarios={usuarios || []} />

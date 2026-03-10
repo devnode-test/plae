@@ -151,7 +151,7 @@ export function Sidebar({ className, onNavigate, userRole = null }: SidebarProps
           <div className="px-3 py-2">
             <div className="space-y-1">
               <h3 className="mb-1 px-4 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                Responsable
+                Líder
               </h3>
               {responsibleRoutes.map((route) => (
                 <Button

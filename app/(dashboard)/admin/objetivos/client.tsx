@@ -324,7 +324,7 @@ export function ObjetivosClient({ initialEjes, initialFocos, initialObjetivos, u
                         {eje?.nombre ? `  |  Eje: ${eje.nombre}` : ''}
                       </div>
                       <div className="text-sm text-muted-foreground">
-                        Responsable: <span className="font-medium">{getResponsibleName(obj.responsable_id)}</span>
+                        Líder: <span className="font-medium">{getResponsibleName(obj.responsable_id)}</span>
                         {'  |  '}
                         Periodo: <span className="font-medium">{obj.año_inicio}–{obj.año_fin}</span>
                       </div>
@@ -358,7 +358,7 @@ export function ObjetivosClient({ initialEjes, initialFocos, initialObjetivos, u
               <TableHead className="w-[10%]">Orden</TableHead>
               <TableHead className="w-[30%]">Objetivo</TableHead>
               <TableHead className="w-[20%]">Foco / Eje</TableHead>
-              <TableHead className="w-[20%]">Responsable</TableHead>
+              <TableHead className="w-[20%]">Líder</TableHead>
               <TableHead className="w-[15%]">Periodo</TableHead>
               <TableHead className="text-right">Acciones</TableHead>
             </TableRow>
@@ -526,7 +526,7 @@ export function ObjetivosClient({ initialEjes, initialFocos, initialObjetivos, u
               </div>
 
               <div className="grid gap-2">
-                <Label htmlFor="responsable" className="text-base font-semibold">Responsable</Label>
+                <Label htmlFor="responsable" className="text-base font-semibold">Líder</Label>
                 <Select
                   value={currentObjetivo.responsable_id || 'unassigned'}
                   onValueChange={(value) =>
@@ -534,7 +534,7 @@ export function ObjetivosClient({ initialEjes, initialFocos, initialObjetivos, u
                   }
                 >
                   <SelectTrigger id="responsable" className="h-12 rounded-xl">
-                    <SelectValue placeholder="Asignar responsable" />
+                    <SelectValue placeholder="Asignar líder" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="unassigned">Sin asignar</SelectItem>

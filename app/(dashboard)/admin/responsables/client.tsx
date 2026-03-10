@@ -219,7 +219,7 @@ export function ResponsablesClient({ initialUsuarios }: ResponsablesClientProps)
                     <div className="text-sm text-muted-foreground">{usuario.email}</div>
                     <div className="pt-1">
                       <Badge variant={usuario.rol === 'admin' ? 'default' : 'secondary'} className="text-[11px]">
-                        {usuario.rol === 'admin' ? 'Administrador' : 'Responsable'}
+                        {usuario.rol === 'admin' ? 'Administrador' : 'Líder'}
                       </Badge>
                     </div>
                   </div>
@@ -273,7 +273,7 @@ export function ResponsablesClient({ initialUsuarios }: ResponsablesClientProps)
                   <TableCell>{usuario.email}</TableCell>
                   <TableCell>
                     <Badge variant={usuario.rol === 'admin' ? 'default' : 'secondary'}>
-                      {usuario.rol === 'admin' ? 'Administrador' : 'Responsable'}
+                      {usuario.rol === 'admin' ? 'Administrador' : 'Líder'}
                     </Badge>
                   </TableCell>
                   <TableCell className="text-right">
@@ -348,7 +348,7 @@ export function ResponsablesClient({ initialUsuarios }: ResponsablesClientProps)
                     <SelectValue placeholder="Selecciona un rol" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="responsable">Responsable</SelectItem>
+                    <SelectItem value="responsable">Líder</SelectItem>
                     <SelectItem value="admin">Administrador</SelectItem>
                   </SelectContent>
                 </Select>

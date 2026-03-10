@@ -24,7 +24,7 @@ export default async function ObjetivosPage() {
       <div>
         <h1 className="text-2xl font-bold tracking-tight md:text-3xl">Gestión de Objetivos</h1>
         <p className="text-sm text-muted-foreground md:text-base">
-          Define objetivos estratégicos, asígnalos a focos y responsables.
+          Define objetivos estratégicos, asígnalos a focos y líderes.
         </p>
       </div>
       <ObjetivosClient 
