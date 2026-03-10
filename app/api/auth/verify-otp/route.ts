@@ -55,12 +55,19 @@ export async function POST(request: Request) {
         .eq('email', normalizedEmail);
 
     const getOrigin = () => {
+      // Prioritize local detection if running on localhost
+      const host = request.headers.get('host') || '';
+      if (host.includes('localhost') || host.includes('127.0.0.1')) {
+         const protocol = request.headers.get('x-forwarded-proto') || 'http';
+         return `${protocol}://${host}`;
+      }
+
       if (process.env.NEXT_PUBLIC_SITE_URL) return process.env.NEXT_PUBLIC_SITE_URL;
       if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
       
-      const host = request.headers.get('x-forwarded-host') || request.headers.get('host');
+      const forwardedHost = request.headers.get('x-forwarded-host');
       const protocol = request.headers.get('x-forwarded-proto') || 'https';
-      if (host) return `${protocol}://${host}`;
+      if (forwardedHost) return `${protocol}://${forwardedHost}`;
       
       return new URL(request.url).origin;
     };
