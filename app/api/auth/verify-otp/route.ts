@@ -57,6 +57,11 @@ export async function POST(request: Request) {
     const getOrigin = () => {
       if (process.env.NEXT_PUBLIC_SITE_URL) return process.env.NEXT_PUBLIC_SITE_URL;
       if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
+      
+      const host = request.headers.get('x-forwarded-host') || request.headers.get('host');
+      const protocol = request.headers.get('x-forwarded-proto') || 'https';
+      if (host) return `${protocol}://${host}`;
+      
       return new URL(request.url).origin;
     };
 
