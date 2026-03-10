@@ -80,7 +80,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex min-h-screen flex-col bg-stone-100">
+    <div className="flex min-h-[100dvh] flex-col bg-stone-100">
       <div className="flex flex-1 items-center justify-center p-4">
         <div className="w-full max-w-md space-y-4">
           <div className="flex justify-center">
@@ -90,7 +90,7 @@ export default function LoginPage() {
                 alt="Logo Saint George's College"
                 width={196}
                 height={98}
-                className="h-auto w-[196px] drop-shadow-[0_8px_16px_rgba(15,23,42,0.16)]"
+                className="h-auto w-[150px] drop-shadow-[0_8px_16px_rgba(15,23,42,0.16)] md:w-[196px]"
                 priority
               />
             </div>
