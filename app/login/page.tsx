@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { createClient } from '@/lib/supabase';
 import { toast } from 'sonner';
 import { Loader2, Mail, Lock } from 'lucide-react';
 
@@ -17,6 +18,43 @@ export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [showOtpInput, setShowOtpInput] = useState(false);
   const router = useRouter();
+  const supabase = useMemo(() => createClient(), []);
+
+  useEffect(() => {
+    const handleSessionFromUrl = async () => {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+
+      if (session) {
+        router.replace('/dashboard');
+        return;
+      }
+
+      const url = new URL(window.location.href);
+      const hashParams = new URLSearchParams(url.hash.startsWith('#') ? url.hash.slice(1) : url.hash);
+      const accessToken = hashParams.get('access_token');
+      const refreshToken = hashParams.get('refresh_token');
+
+      if (!accessToken || !refreshToken) return;
+
+      const { error } = await supabase.auth.setSession({
+        access_token: accessToken,
+        refresh_token: refreshToken,
+      });
+
+      if (error) {
+        toast.error('Error al iniciar sesión');
+        return;
+      }
+
+      window.history.replaceState({}, document.title, '/login');
+      toast.success('Sesión iniciada correctamente');
+      router.replace('/dashboard');
+    };
+
+    handleSessionFromUrl();
+  }, [router, supabase]);
 
   const handleSendOtp = async (e: React.FormEvent) => {
     e.preventDefault();
